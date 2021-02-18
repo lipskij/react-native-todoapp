@@ -53,18 +53,18 @@ export default function App() {
       <View style={styles.inputBar}>
         <TextInput
           style={{ backgroundColor: "transparent", width: "90%" }}
-          placeholder="Add task"
+          placeholder='Add task'
           onChangeText={(value) => setText(value)}
           value={text}
           autoFocus={true}
         />
         <TouchableHighlight
           style={{ alignItems: "center", justifyContent: "center" }}
-          underlayColor="transparent"
+          underlayColor='transparent'
           onPress={() => addTodo()}
         >
           <View>
-            <Icon name="plus" size={30} color="lightblue" />
+            <Icon name='plus' size={30} color='lightblue' />
           </View>
         </TouchableHighlight>
       </View>
@@ -91,9 +91,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "flex-start",
+    minWidth: '100%'
   },
 
   inputBar: {
+    // flex: 2,
     flexDirection: "row",
     margin: 5,
     padding: 5,
