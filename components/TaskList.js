@@ -24,35 +24,34 @@ const TaskList = (props) => {
   );
   return (
     <View style={styles.list}>
-        {checkBtn}
       <Text style={styles.todos}>
         {props.todo.name}
-      </Text>
+        {checkBtn}
         {delBtn}
+      </Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   list: {
-    flex: 1,
     display: "flex",
     justifyContent: "space-between",
-    alignItems: 'stretch',
+    alignItems: "stretch",
     width: 300,
   },
   todos: {
+    display: "flex",
     width: "75%",
     fontSize: 24,
-    left: 10,
+    left: 3,
   },
+  // works only on web
   btnCheck: {
-    left: 10,
-    right: 20,
+    paddingLeft: 190,
   },
   btnDel: {
-    left: 10,
-    width: 50,
+    paddingLeft: 20,
   },
 });
 
