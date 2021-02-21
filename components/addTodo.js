@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Text, StyleSheet, TextInput, Button, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, TextInput, Button, View } from "react-native";
 
 const AddTodo = ({ submitHandler }) => {
   const [text, setText] = useState("");

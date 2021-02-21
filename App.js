@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, StyleSheet, FlatList, Alert } from "react-native";
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  Alert,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import Header from "./components/header";
 import TodoList from "./components/taskList";
 import AddTodo from "./components/addTodo";
@@ -26,21 +33,23 @@ const Todo = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Header />
-      <View style={styles.content}>
-        <AddTodo submitHandler={submitHandler} />
-        <View style={styles.list}>
-          <FlatList
-            // keyExtractor={(item) => item.index_id.toString()}
-            data={todos}
-            renderItem={({ item }) => (
-              <TodoList item={item} pressHandler={pressHandler} />
-            )}
-          ></FlatList>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        <Header />
+        <View style={styles.content}>
+          <AddTodo submitHandler={submitHandler} />
+          <View style={styles.list}>
+            <FlatList
+              // keyExtractor={(item) => item.index_id.toString()}
+              data={todos}
+              renderItem={({ item }) => (
+                <TodoList item={item} pressHandler={pressHandler} />
+              )}
+            ></FlatList>
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -50,9 +59,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   content: {
+    backgroundColor: '#ddd',
+    flex: 1,
     padding: 40,
   },
   list: {
+    flex: 1,
     marginTop: 20,
   },
 });
