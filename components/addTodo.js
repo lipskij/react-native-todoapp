@@ -4,18 +4,15 @@ import { StyleSheet, TextInput, Button, View } from "react-native";
 const AddTodo = ({ submitHandler }) => {
   const [text, setText] = useState("");
 
-  const changeHandler = (val) => {
-    setText(val);
-  };
-
   return (
     <View>
       <TextInput
         style={styles.input}
         placeholder='Add task'
-        onChangeText={changeHandler}
+        onChangeText={val => setText(val)}
+        value={text}
       />
-      <Button onPress={() => submitHandler(text)} title='Add' color='coral' />
+      <Button onPress={() => submitHandler(text)} title='ADD' color='#8A2BE2' />
     </View>
   );
 };

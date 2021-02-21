@@ -32,6 +32,14 @@ const Todo = () => {
     }
   };
 
+  const checkHandler = (id) => {
+    setTodos(
+      todos.filter((todo) => {
+        return todo.key !== id;
+      })
+    );
+  };
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
@@ -43,7 +51,11 @@ const Todo = () => {
               // keyExtractor={(item) => item.index_id.toString()}
               data={todos}
               renderItem={({ item }) => (
-                <TodoList item={item} pressHandler={pressHandler} />
+                <TodoList
+                  item={item}
+                  pressHandler={pressHandler}
+                  checkHandler={checkHandler}
+                />
               )}
             ></FlatList>
           </View>
@@ -59,7 +71,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   content: {
-    backgroundColor: '#ddd',
     flex: 1,
     padding: 40,
   },
