@@ -13,12 +13,22 @@ const TaskList = ({ item, pressHandler, checkHandler }) => {
         color='red'
         onPress={() => pressHandler(item.key)}
       />
-      <Text style={styles.task}>{item.text}</Text>
+      <Text
+        style={{
+          opacity: pressed ? 0.3 : 1,
+          textDecorationLine: pressed ? "line-through" : "none",
+        }}
+      >
+        {item.text}
+      </Text>
       <AntDesign
         name='checkcircle'
         size={24}
         color={pressed ? "green" : "black"}
-        onPress={() => {checkHandler(item.id); setPressed(!pressed)}}
+        onPress={() => {
+          checkHandler(item.id);
+          setPressed(!pressed);
+        }}
       />
     </View>
   );
@@ -33,11 +43,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     backgroundColor: "#fff",
-    justifyContent: 'center'
-  },
-  task: {
-    marginLeft: 80,
-    marginRight: 80
+    justifyContent: "space-between",
   },
 });
 

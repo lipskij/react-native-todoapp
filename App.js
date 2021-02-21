@@ -23,7 +23,7 @@ const Todo = () => {
   const submitHandler = (text) => {
     if (text.length > 3) {
       setTodos((prevTodos) => {
-        return [{ text: text, key: Math.random().toString() }, ...prevTodos];
+        return [{ text: text, key: Math.random() }, ...prevTodos];
       });
     } else {
       Alert.alert("OOPS", "Task must be over 3 characters long", [
