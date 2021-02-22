@@ -10,9 +10,12 @@ import {
 import Header from "./components/header";
 import TodoList from "./components/taskList";
 import AddTodo from "./components/addTodo";
+import FilterTodo from "./components/filterTodo";
 
 const Todo = () => {
-  const [todos, setTodos] = useState([{ text: "hello world", id: 1 }]);
+  const [todos, setTodos] = useState([
+    { text: "hello world", id: "1", done: false },
+  ]);
 
   const pressHandler = (key) => {
     setTodos((prevTodos) => {
@@ -23,7 +26,10 @@ const Todo = () => {
   const submitHandler = (text) => {
     if (text.length > 3) {
       setTodos((prevTodos) => {
-        return [{ text: text, key: Math.random() }, ...prevTodos];
+        return [
+          { text: text, key: Math.random().toString(), done: false },
+          ...prevTodos,
+        ];
       });
     } else {
       Alert.alert("OOPS", "Task must be over 3 characters long", [
@@ -32,13 +38,27 @@ const Todo = () => {
     }
   };
 
-  const checkHandler = (id) => {
+  const checkHandler = (key) => {
     setTodos(
-      todos.filter((todo) => {
-        return todo.key !== id;
+      todos.map((todo) => {
+        return todo.key !== key
+          ? {...todo}
+          : { ...todo, done: true };
       })
     );
   };
+
+  // const filterDone = (key) => {
+  //   setTodos(
+  //     todos.map((todo) => {
+  //       return todo.key === key
+  //         ? { ...todo, done: true }
+  //         : { ...todo, done: false };
+  //     })
+  //   );
+  // };
+
+  console.log(todos);
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -55,11 +75,13 @@ const Todo = () => {
                   item={item}
                   pressHandler={pressHandler}
                   checkHandler={checkHandler}
+                  // filterDone={filterDone}
                 />
               )}
             ></FlatList>
           </View>
         </View>
+        <FilterTodo />
       </View>
     </TouchableWithoutFeedback>
   );
@@ -72,7 +94,8 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    padding: 40,
+    padding: 25,
+    paddingBottom: 0,
   },
   list: {
     flex: 1,

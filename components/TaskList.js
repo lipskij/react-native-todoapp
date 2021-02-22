@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text, StyleSheet, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
-const TaskList = ({ item, pressHandler, checkHandler }) => {
+const TaskList = ({ item, pressHandler, checkHandler, filterDone }) => {
   const [pressed, setPressed] = useState(false);
 
   return (
@@ -26,7 +26,8 @@ const TaskList = ({ item, pressHandler, checkHandler }) => {
         size={24}
         color={pressed ? "green" : "black"}
         onPress={() => {
-          checkHandler(item.id);
+          checkHandler(item.key);
+          // filterDone(item.id)
           setPressed(!pressed);
         }}
       />
