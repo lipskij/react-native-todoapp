@@ -41,22 +41,30 @@ const Todo = () => {
   const checkHandler = (key) => {
     setTodos(
       todos.map((todo) => {
-        return todo.key !== key
-          ? {...todo}
-          : { ...todo, done: true };
+        if (!todo.done) {
+          return todo.key !== key ? { ...todo } : { ...todo, done: true };
+        } else {
+          return todo.key !== key ? { ...todo } : { ...todo, done: false };
+        }
       })
     );
   };
 
-  // const filterDone = (key) => {
-  //   setTodos(
-  //     todos.map((todo) => {
-  //       return todo.key === key
-  //         ? { ...todo, done: true }
-  //         : { ...todo, done: false };
-  //     })
-  //   );
-  // };
+  const filterDone = () => {
+    setTodos(
+      todos.filter((todo) => {
+        return todo.done === true;
+      })
+    );
+  };
+
+  const filterUndone = () => {
+    setTodos(
+      todos.filter((todo) => {
+        return todo.done === false;
+      })
+    );
+  };
 
   console.log(todos);
 
@@ -75,13 +83,12 @@ const Todo = () => {
                   item={item}
                   pressHandler={pressHandler}
                   checkHandler={checkHandler}
-                  // filterDone={filterDone}
                 />
               )}
             ></FlatList>
           </View>
         </View>
-        <FilterTodo />
+        <FilterTodo filterDone={filterDone} filterUndone={filterUndone} />
       </View>
     </TouchableWithoutFeedback>
   );

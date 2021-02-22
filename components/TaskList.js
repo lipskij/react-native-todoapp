@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text, StyleSheet, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
-const TaskList = ({ item, pressHandler, checkHandler, filterDone }) => {
+const TaskList = ({ item, pressHandler, checkHandler }) => {
   const [pressed, setPressed] = useState(false);
 
   return (

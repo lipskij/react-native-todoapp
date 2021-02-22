@@ -1,19 +1,18 @@
 import React from "react";
-import { Text, StyleSheet, View, Button, FlatList } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { StyleSheet, View, Button } from "react-native";
 
-const FilterTodo = ({item, filterDone}) => {
+const FilterTodo = ({item, filterDone, filterUndone}) => {
 
   return (
     <View style={styles.filter}>
       <View style={styles.actionBtn}>
-        <Button title='Done' color='#8A2BE2'  onPress={() => filterDone()} />
+        <Button title='Done' color='#8A2BE2'  onPress={() => filterDone(item)} />
       </View>
       <View style={styles.actionBtn}>
         <Button title='All' color='#8A2BE2' />
       </View>
       <View style={styles.actionBtn}>
-        <Button title='Undone' color='#8A2BE2' />
+        <Button title='Undone' color='#8A2BE2' onPress={() => filterUndone(item)}/>
       </View>
     </View>
   );
