@@ -53,7 +53,9 @@ const Todo = () => {
   const filterDone = () => {
     setTodos(
       todos.filter((todo) => {
-        return todo.done === true;
+        if (todo.done === true) {
+          return todo.done === true;
+        }
       })
     );
   };
@@ -61,7 +63,9 @@ const Todo = () => {
   const filterUndone = () => {
     setTodos(
       todos.filter((todo) => {
-        return todo.done === false;
+        if (todo.done === false) {
+          return todo.done === false;
+        }
       })
     );
   };
