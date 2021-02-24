@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text, StyleSheet, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
-const TaskList = ({ item, pressHandler, checkHandler }) => {
+const TodoList = ({ item, deleteHandler, checkHandler }) => {
   const [pressed, setPressed] = useState(false);
 
   return (
@@ -11,7 +11,7 @@ const TaskList = ({ item, pressHandler, checkHandler }) => {
         name='delete'
         size={24}
         color='red'
-        onPress={() => pressHandler(item.key)}
+        onPress={() => deleteHandler(item.key)}
       />
       <Text
         style={{
@@ -47,4 +47,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TaskList;
+export default TodoList;

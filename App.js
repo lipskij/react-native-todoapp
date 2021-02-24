@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -6,23 +6,22 @@ import {
   Alert,
   TouchableWithoutFeedback,
   Keyboard,
+  Button,
 } from "react-native";
 import Header from "./components/header";
 import TodoList from "./components/taskList";
 import AddTodo from "./components/addTodo";
-import FilterTodo from "./components/filterTodo";
 
 const Todo = () => {
   const [todos, setTodos] = useState([
     { text: "hello world", id: "1", done: false },
   ]);
-  const [filterStatus, setFilterStatus] = useState([]);
+  const [status, setStatus] = useState("ALL");
+  const [filteredTodos, setFilteredTodos] = useState([]);
 
-  const pressHandler = (key) => {
-    setTodos((prevTodos) => {
-      return prevTodos.filter((todo) => todo.key != key);
-    });
-  };
+  useLayoutEffect(() => {
+    filterHandler();
+  },[todos, status])
 
   const submitHandler = (text) => {
     if (text.length > 3) {
@@ -39,6 +38,12 @@ const Todo = () => {
     }
   };
 
+  const deleteHandler = (key) => {
+    setTodos((prevTodos) => {
+      return prevTodos.filter((todo) => todo.key != key);
+    });
+  };
+
   const checkHandler = (key) => {
     setTodos(
       todos.map((todo) => {
@@ -51,7 +56,22 @@ const Todo = () => {
     );
   };
 
+  const filterHandler = () => {
+    switch (status) {
+      case "DONE":
+        setFilteredTodos(todos.filter((todo) => todo.done === true));
+        break;
+      case "UNDONE":
+        setFilteredTodos(todos.filter((todo) => todo.done === false));
+        break;
+      default:
+        setFilteredTodos(todos);
+        break;
+    }
+  };
+
   console.log(todos);
+  console.log(status);
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -62,19 +82,48 @@ const Todo = () => {
           <View style={styles.list}>
             <FlatList
               // keyExtractor={(item) => item.index_id.toString()}
-              data={todos}
+              data={filteredTodos}
               renderItem={({ item }) => (
                 <TodoList
                   item={item}
-                  pressHandler={pressHandler}
+                  deleteHandler={deleteHandler}
                   checkHandler={checkHandler}
-                  
+                  setStatus={setStatus}
+                  filterHandler={filterHandler}
                 />
               )}
             ></FlatList>
           </View>
         </View>
-        <FilterTodo />
+        <View style={styles.filter}>
+          <View style={styles.actionBtn}>
+            <Button
+              title='Done'
+              color='#8A2BE2'
+              onPress={(e) => {
+                setStatus(e.target.innerText);
+              }}
+            />
+          </View>
+          <View style={styles.actionBtn}>
+            <Button
+              title='All'
+              color='#8A2BE2'
+              onPress={(e) => {
+                setStatus(e.target.innerText);
+              }}
+            />
+          </View>
+          <View style={styles.actionBtn}>
+            <Button
+              title='Undone'
+              color='#8A2BE2'
+              onPress={(e) => {
+                setStatus(e.target.innerText);
+              }}
+            />
+          </View>
+        </View>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -93,6 +142,21 @@ const styles = StyleSheet.create({
   list: {
     flex: 1,
     marginTop: 20,
+  },
+  filter: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+    backgroundColor: "lightblue",
+  },
+  actionBtn: {
+    flex: 1,
+    height: "100%",
+    borderColor: "#8A2BE2",
+    borderWidth: 1,
+    padding: 22,
+    borderBottomWidth: 0,
+    backgroundColor: "lightblue",
   },
 });
 
