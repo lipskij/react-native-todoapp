@@ -16,6 +16,7 @@ const Todo = () => {
   const [todos, setTodos] = useState([
     { text: "hello world", id: "1", done: false },
   ]);
+  const [filterStatus, setFilterStatus] = useState([]);
 
   const pressHandler = (key) => {
     setTodos((prevTodos) => {
@@ -50,26 +51,6 @@ const Todo = () => {
     );
   };
 
-  const filterDone = () => {
-    setTodos(
-      todos.filter((todo) => {
-        if (todo.done === true) {
-          return todo.done === true;
-        }
-      })
-    );
-  };
-
-  const filterUndone = () => {
-    setTodos(
-      todos.filter((todo) => {
-        if (todo.done === false) {
-          return todo.done === false;
-        }
-      })
-    );
-  };
-
   console.log(todos);
 
   return (
@@ -87,12 +68,13 @@ const Todo = () => {
                   item={item}
                   pressHandler={pressHandler}
                   checkHandler={checkHandler}
+                  
                 />
               )}
             ></FlatList>
           </View>
         </View>
-        <FilterTodo filterDone={filterDone} filterUndone={filterUndone} />
+        <FilterTodo />
       </View>
     </TouchableWithoutFeedback>
   );

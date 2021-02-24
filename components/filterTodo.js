@@ -1,18 +1,20 @@
-import React from "react";
+import React, {useState} from "react";
 import { StyleSheet, View, Button } from "react-native";
 
-const FilterTodo = ({item, filterDone, filterUndone}) => {
+const FilterTodo = () => {
+  const [status, setStatus] = useState("ALL");
+  console.log(status)
 
   return (
     <View style={styles.filter}>
       <View style={styles.actionBtn}>
-        <Button title='Done' color='#8A2BE2'  onPress={() => filterDone(item)} />
+        <Button title='Done' color='#8A2BE2'  onPress={(e) => {setStatus(e.target.innerText)}} />
       </View>
       <View style={styles.actionBtn}>
-        <Button title='All' color='#8A2BE2' />
+        <Button title='All' color='#8A2BE2' onPress={(e) => {setStatus(e.target.innerText)}}/>
       </View>
       <View style={styles.actionBtn}>
-        <Button title='Undone' color='#8A2BE2' onPress={() => filterUndone(item)}/>
+        <Button title='Undone' color='#8A2BE2' onPress={(e) => {setStatus(e.target.innerText)}}/>
       </View>
     </View>
   );

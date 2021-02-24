@@ -27,7 +27,6 @@ const TaskList = ({ item, pressHandler, checkHandler }) => {
         color={pressed ? "green" : "black"}
         onPress={() => {
           checkHandler(item.key);
-          // filterDone(item.id)
           setPressed(!pressed);
         }}
       />
