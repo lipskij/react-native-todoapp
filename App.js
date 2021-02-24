@@ -21,6 +21,7 @@ const Todo = () => {
 
   useLayoutEffect(() => {
     filterHandler();
+    console.log(status)
   },[todos, status])
 
   const submitHandler = (text) => {
@@ -70,7 +71,7 @@ const Todo = () => {
     }
   };
 
-  console.log(todos);
+  // console.log(todos);
   console.log(status);
 
   return (
@@ -100,8 +101,8 @@ const Todo = () => {
             <Button
               title='Done'
               color='#8A2BE2'
-              onPress={(e) => {
-                setStatus(e.target.innerText);
+              onPress={() => {
+                setStatus("DONE");
               }}
             />
           </View>
@@ -109,8 +110,8 @@ const Todo = () => {
             <Button
               title='All'
               color='#8A2BE2'
-              onPress={(e) => {
-                setStatus(e.target.innerText);
+              onPress={() => {
+                setStatus("ALL");
               }}
             />
           </View>
@@ -119,7 +120,7 @@ const Todo = () => {
               title='Undone'
               color='#8A2BE2'
               onPress={(e) => {
-                setStatus(e.target.innerText);
+                setStatus('UNDONE');
               }}
             />
           </View>
