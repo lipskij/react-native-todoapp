@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, StyleSheet, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 const TodoList = ({ item, deleteHandler, checkHandler }) => {
   const [pressed, setPressed] = useState(false);
+
+  useEffect(() => {
+    if (item.done === true) {
+      setPressed(true);
+    }
+  }, []);
 
   return (
     <View style={styles.item}>

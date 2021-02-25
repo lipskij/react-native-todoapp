@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -19,10 +19,9 @@ const Todo = () => {
   const [status, setStatus] = useState("ALL");
   const [filteredTodos, setFilteredTodos] = useState([]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     filterHandler();
-    console.log(status)
-  },[todos, status])
+  }, [todos, status]);
 
   const submitHandler = (text) => {
     if (text.length > 3) {
@@ -71,9 +70,6 @@ const Todo = () => {
     }
   };
 
-  // console.log(todos);
-  console.log(status);
-
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
@@ -120,7 +116,7 @@ const Todo = () => {
               title='Undone'
               color='#8A2BE2'
               onPress={(e) => {
-                setStatus('UNDONE');
+                setStatus("UNDONE");
               }}
             />
           </View>

@@ -9,7 +9,7 @@ const AddTodo = ({ submitHandler }) => {
       <TextInput
         style={styles.input}
         placeholder='Add task'
-        onChangeText={val => setText(val)}
+        onChangeText={(val) => setText(val)}
         value={text}
       />
       <Button onPress={() => submitHandler(text)} title='ADD' color='#8A2BE2' />
